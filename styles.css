@@ -8,16 +8,16 @@ body {
 
 /* Scrollbar */
 ::-webkit-scrollbar { width: 10px; }
-::-webkit-scrollbar-track { 
+::-webkit-scrollbar-track {
     background: #0a0a0f;
     border-left: 1px solid rgba(255, 255, 255, 0.05);
 }
-::-webkit-scrollbar-thumb { 
+::-webkit-scrollbar-thumb {
     background: linear-gradient(180deg, #3b82f6, #8b5cf6);
     border-radius: 10px;
     border: 2px solid #0a0a0f;
 }
-::-webkit-scrollbar-thumb:hover { 
+::-webkit-scrollbar-thumb:hover {
     background: linear-gradient(180deg, #60a5fa, #a78bfa);
     box-shadow: 0 0 10px rgba(99, 102, 241, 0.4);
 }
@@ -28,17 +28,17 @@ body {
     scrollbar-color: #6366f1 #0a0a0f;
 }
 
-/* Noise texture */
+/* Noise texture — z-index:1 so it never blocks interactive elements */
 body::before {
     content: '';
     position: fixed;
     inset: 0;
-    background-image: 
+    background-image:
         repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,.03) 2px, rgba(255,255,255,.03) 4px),
         repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(255,255,255,.03) 2px, rgba(255,255,255,.03) 4px);
     opacity: 0.3;
     pointer-events: none;
-    z-index: 9999;
+    z-index: 1;
 }
 
 /* Reveal animation */
@@ -68,7 +68,6 @@ body::before {
     background-clip: text;
 }
 
-
 /* Glass panel */
 .glass-panel {
     background: rgba(255, 255, 255, 0.06);
@@ -95,6 +94,7 @@ body::before {
 }
 .marquee-track {
     animation: marquee 30s linear infinite;
+    will-change: transform;
 }
 .marquee-track:hover {
     animation-play-state: paused;
@@ -145,7 +145,6 @@ body::before {
     transition: width 1.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-
 /* Cursor glow */
 .cursor-glow {
     position: fixed;
@@ -161,6 +160,13 @@ body::before {
 
 /* Smooth scroll */
 html { scroll-behavior: smooth; }
+
+/* Focus-visible — keyboard accessibility */
+:focus-visible {
+    outline: 2px solid #818cf8;
+    outline-offset: 2px;
+    border-radius: 4px;
+}
 
 /* Nav active */
 .nav-link {
@@ -277,6 +283,18 @@ html { scroll-behavior: smooth; }
     transform: scale(1.05);
 }
 
+/* Back to top — hidden by default, shown via JS class */
+#backToTop {
+    opacity: 0;
+    transform: translateY(16px);
+    pointer-events: none;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+#backToTop.visible {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
 
 /* Logo animation */
 .logo-icon {
@@ -303,4 +321,10 @@ html { scroll-behavior: smooth; }
         opacity: 1;
         transform: translateX(0);
     }
+}
+
+/* Dark-mode select dropdown options */
+select option {
+    background: #1a1a2e;
+    color: #e2e8f0;
 }
