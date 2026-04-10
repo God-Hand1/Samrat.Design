@@ -304,3 +304,10 @@ html { scroll-behavior: smooth; }
         transform: translateX(0);
     }
 }
+
+/* Back to top button visibility */
+#backToTop.visible {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
