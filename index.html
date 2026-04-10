@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portfolio of Samrath Gupta, a passionate Video Editor & Graphic Designer bringing stories to life.">
+    <title>Samrath Gupta — Video Editor & Graphic Designer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+    <!-- Cursor Glow -->
+    <div class="cursor-glow" id="cursorGlow"></div>
+
+    <!-- Toast -->
+    <div class="toast" id="toast">
+        <span class="iconify" data-icon="lucide:check-circle" data-width="16"></span>
+        <span id="toastMsg">Message sent!</span>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50" style="background: rgba(3,3,4,0.8); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.05);">
+        <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+            <!-- Logo -->
+            <a href="#hero" class="flex items-center gap-3 group">
+                <div class="w-8 h-8 rounded-lg flex items-center justify-center text-sm font-semibold" style="background: linear-gradient(to top right, #6366f1, #a855f7);">S</div>
+                <span class="font-medium text-sm tracking-tight hidden sm:block">Samrath<span class="text-slate-500">.design</span></span>
+            </a>
+
+            <!-- Desktop Links -->
+            <div class="hidden md:flex items-center gap-8">
+                <a href="#about" class="nav-link text-xs font-medium text-slate-400 hover:text-white tracking-wide uppercase">About</a>
+                <a href="#skills" class="nav-link text-xs font-medium text-slate-400 hover:text-white tracking-wide uppercase">Skills</a>
+                <a href="#services" class="nav-link text-xs font-medium text-slate-400 hover:text-white tracking-wide uppercase">Services</a>
+                <a href="#portfolio" class="nav-link text-xs font-medium text-slate-400 hover:text-white tracking-wide uppercase">Portfolio</a>
+                <a href="#contact" class="nav-link text-xs font-medium text-slate-400 hover:text-white tracking-wide uppercase">Contact</a>
+            </div>
+
+            <!-- CTA + Mobile Toggle -->
+            <div class="flex items-center gap-4">
+                <a href="#contact" class="hidden sm:inline-flex items-center gap-2 px-5 py-2 rounded-lg text-xs font-semibold bg-white text-black hover:shadow-[0_0_20px_-5px_rgba(255,255,255,0.3)] transition-all duration-300">
+                    Hire Me
+                    <span class="iconify" data-icon="lucide:arrow-right" data-width="14"></span>
+                </a>
+                <button id="menuToggle" aria-label="Toggle navigation menu" class="md:hidden w-10 h-10 flex items-center justify-center rounded-lg hover:bg-white/5 transition-colors">
+                    <span class="iconify" data-icon="lucide:menu" data-width="20" id="menuIcon"></span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div class="mobile-menu md:hidden" id="mobileMenu">
+            <div class="px-6 pb-6 pt-2 flex flex-col gap-4 border-t border-white/5">
+                <a href="#about" class="text-sm text-slate-400 hover:text-white transition-colors py-2" onclick="closeMobile()">About</a>
+                <a href="#skills" class="text-sm text-slate-400 hover:text-white transition-colors py-2" onclick="closeMobile()">Skills</a>
+                <a href="#services" class="text-sm text-slate-400 hover:text-white transition-colors py-2" onclick="closeMobile()">Services</a>
+                <a href="#portfolio" class="text-sm text-slate-400 hover:text-white transition-colors py-2" onclick="closeMobile()">Portfolio</a>
+                <a href="#contact" class="text-sm text-slate-400 hover:text-white transition-colors py-2" onclick="closeMobile()">Contact</a>
+                <a href="#contact" class="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg text-xs font-semibold bg-white text-black mt-2" onclick="closeMobile()">Hire Me</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="relative min-h-screen flex flex-col items-center justify-center px-6 pt-32 pb-20 md:pt-48 md:pb-32 overflow-hidden">
+        <div class="hero-glow"></div>
+
+        <!-- Status badge -->
+        <div class="reveal flex items-center gap-2 px-4 py-2 rounded-full mb-8" style="background: rgba(99,102,241,0.1); border: 1px solid rgba(99,102,241,0.2);">
+            <span class="relative flex h-2 w-2">
+                <span class="absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" style="animation: ping 1s cubic-bezier(0,0,0.2,1) infinite;"></span>
+                <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+            </span>
+            <span class="text-xs font-medium text-indigo-300">Available for freelance work</span>
+        </div>
+
+        <!-- Main heading -->
+        <h1 class="reveal delay-100 text-center text-5xl md:text-7xl lg:text-8xl font-medium tracking-tight leading-[1.05] max-w-5xl">
+            <span class="gradient-text">Samrath</span><br>
+            <span class="gradient-text">Gupta</span>
+        </h1>
+
+        <!-- Subtitle with typing effect -->
+        <div class="reveal delay-200 mt-6 md:mt-8 flex items-center gap-1 text-lg md:text-xl font-light text-slate-400">
+            <span id="typingText"></span>
+            <span class="typing-cursor"></span>
+        </div>
+
+        <!-- Description -->
+        <p class="reveal delay-300 mt-6 text-center text-sm md:text-base font-light leading-relaxed text-slate-500 max-w-2xl">
+            Passionate Video Editor & Graphic Designer with 2 years of experience crafting 
+            YouTube videos, reels, promos, and social media content with clean cuts 
+            and smooth transitions.
+        </p>
+
+        <!-- CTA Buttons -->
+        <div class="reveal delay-400 mt-10 flex flex-col sm:flex-row items-center gap-4">
+            <a href="#portfolio" class="group inline-flex items-center gap-2 px-8 py-3.5 rounded-xl text-sm font-semibold bg-white text-black hover:shadow-[0_0_30px_-5px_rgba(255,255,255,0.3)] transition-all duration-300">
+                View My Work
+                <span class="iconify transition-transform duration-300 group-hover:translate-x-1" data-icon="lucide:arrow-right" data-width="16"></span>
+            </a>
+            <a href="#contact" class="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl text-sm font-semibold text-white transition-all duration-300 hover:bg-white/5" style="border: 1px solid rgba(255,255,255,0.1);">
+                <span class="iconify" data-icon="lucide:mail" data-width="16"></span>
+                Get In Touch
+            </a>
+        </div>
+
+        <!-- Quick stats -->
+        <div class="reveal delay-500 mt-16 flex flex-wrap items-center justify-center gap-8 md:gap-12">
+            <div class="text-center">
+                <div class="text-2xl md:text-3xl font-semibold text-white counter" data-target="2">0</div>
+                <div class="text-xs text-slate-500 mt-1 uppercase tracking-wider">Years Exp.</div>
+            </div>
+            <div class="w-px h-10 bg-white/10 hidden sm:block"></div>
+            <div class="text-center">
+                <div class="text-2xl md:text-3xl font-semibold text-white counter" data-target="50">0</div>
+                <div class="text-xs text-slate-500 mt-1 uppercase tracking-wider">Projects</div>
+            </div>
+            <div class="w-px h-10 bg-white/10 hidden sm:block"></div>
+            <div class="text-center">
+                <div class="text-2xl md:text-3xl font-semibold text-white counter" data-target="30">0</div>
+                <div class="text-xs text-slate-500 mt-1 uppercase tracking-wider">Happy Clients</div>
+            </div>
+            <div class="w-px h-10 bg-white/10 hidden sm:block"></div>
+            <div class="text-center">
+                <div class="text-2xl md:text-3xl font-semibold text-white flex items-center gap-1"><span class="counter" data-target="100">0</span>%</div>
+                <div class="text-xs text-slate-500 mt-1 uppercase tracking-wider">Satisfaction</div>
+            </div>
+        </div>
+
+        <!-- Scroll indicator -->
+        <div class="reveal delay-600 absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2">
+            <span class="text-[10px] uppercase tracking-widest text-slate-600">Scroll</span>
+            <div class="w-5 h-8 rounded-full border border-white/10 flex items-start justify-center p-1.5">
+                <div class="w-1 h-2 rounded-full bg-indigo-500" style="animation: float 2s ease-in-out infinite;"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Marquee Section -->
+    <section class="py-8 border-y" style="border-color: rgba(255,255,255,0.05);">
+        <div class="overflow-hidden">
+            <div class="marquee-track flex items-center gap-8 whitespace-nowrap" style="width: max-content;">
+                <span class="text-sm font-medium text-slate-600 flex items-center gap-3"><span class="iconify" data-icon="lucide:scissors" data-width="16"></span> Video Editing</span>
+                <span class="text-slate-700">✦</span>
+                <span class="text-sm font-medium text-slate-600 flex items-center gap-3"><span class="iconify" data-icon="lucide:palette" data-width="16"></span> Graphic Design</span>
+                <span class="text-slate-700">✦</span>
+                <span class="text-sm font-medium text-slate-600 flex items-center gap-3"><span class="iconify" data-icon="lucide:youtube" data-width="16"></span> YouTube Content</span>
+                <span class="text-slate-700">✦</span>
+                <span class="text-sm font-medium text-slate-600 flex items-center gap-3"><span class="iconify" data-icon="lucide:instagram" data-width="16"></span> Reels & Shorts</span>
+                <span class="text-slate-700">✦</span>
+                <span class="text-sm font-medium text-slate-600 flex items-center gap-3"><span class="iconify" data-icon="lucide:megaphone" data-width="16"></span> Promo Videos</span>
+                <span class="text-slate-700">✦</span>
+                <span class="text-sm font-medium text-slate-600 flex items-center gap-3"><span class="iconify" data-icon="lucide:share-2" data-width="16"></span> Social Media</span>
+                <span class="text-slate-700">✦</span>
+                <span class="text-sm font-medium text-slate-600 flex items-center gap-3"><span class="iconify" data-icon="lucide:wand-2" data-width="16"></span> Motion Graphics</span>
+                <span class="text-slate-700">✦</span>
+                <span class="text-sm font-medium text-slate-600 flex items-center gap-3"><span class="iconify" data-icon="lucide:layers" data-width="16"></span> Thumbnail Design</span>
+                <span class="text-slate-700">✦</span>
+                <!-- Duplicate for seamless loop -->
+                <span class="text-sm font-medium text-slate-600 flex items-center gap-3"><span class="iconify" data-icon="lucide:scissors" data-width="16"></span> Video Editing</span>
+                <span class="text-slate-700">✦</span>
+                <span class="text-sm font-medium text-slate-600 flex items-center gap-3"><span class="iconify" data-icon="lucide:palette" data-width="16"></span> Graphic Design</span>
+                <span class="text-slate-700">✦</span>
+                <span class="text-sm font-medium text-slate-600 flex items-center gap-3"><span class="iconify" data-icon="lucide:youtube" data-width="16"></span> YouTube Content</span>
+                <span class="text-slate-700">✦</span>
+                <span class="text-sm font-medium text-slate-600 flex items-center gap-3"><span class="iconify" data-icon="lucide:instagram" data-width="16"></span> Reels & Shorts</span>
+                <span class="text-slate-700">✦</span>
+                <span class="text-sm font-medium text-slate-600 flex items-center gap-3"><span class="iconify" data-icon="lucide:megaphone" data-width="16"></span> Promo Videos</span>
+                <span class="text-slate-700">✦</span>
+                <span class="text-sm font-medium text-slate-600 flex items-center gap-3"><span class="iconify" data-icon="lucide:share-2" data-width="16"></span> Social Media</span>
+                <span class="text-slate-700">✦</span>
+                <span class="text-sm font-medium text-slate-600 flex items-center gap-3"><span class="iconify" data-icon="lucide:wand-2" data-width="16"></span> Motion Graphics</span>
+                <span class="text-slate-700">✦</span>
+                <span class="text-sm font-medium text-slate-600 flex items-center gap-3"><span class="iconify" data-icon="lucide:layers" data-width="16"></span> Thumbnail Design</span>
+                <span class="text-slate-700">✦</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-24 md:py-32 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-2 gap-16 items-center">
+                <!-- Left: Image -->
+                <div class="reveal relative">
+                    <div class="relative rounded-2xl overflow-hidden aspect-[4/5]" style="border: 1px solid rgba(255,255,255,0.08);">
+                        <img src="https://picsum.photos/seed/samrath-portrait/600/750.jpg" alt="Samrath Gupta" loading="lazy" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#030304] via-transparent to-transparent"></div>
+                    </div>
+                    <!-- Floating badge -->
+                    <div class="absolute -bottom-4 -right-4 md:bottom-8 md:-right-8 glass-panel rounded-2xl p-4 float">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-lg flex items-center justify-center" style="background: linear-gradient(to top right, #6366f1, #a855f7);">
+                                <span class="iconify text-white" data-icon="lucide:award" data-width="18"></span>
+                            </div>
+                            <div>
+                                <div class="text-sm font-semibold">2+ Years</div>
+                                <div class="text-[11px] text-slate-500">Experience</div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Decorative ring -->
+                    <div class="absolute -top-6 -left-6 w-24 h-24 rounded-full border border-indigo-500/20 spin-slow"></div>
+                </div>
+
+                <!-- Right: Content -->
+                <div>
+                    <div class="reveal">
+                        <span class="text-[11px] font-semibold uppercase tracking-widest text-indigo-400">About Me</span>
+                    </div>
+                    <h2 class="reveal delay-100 mt-4 text-3xl md:text-4xl font-medium tracking-tight gradient-text">
+                        Bringing Stories to Life<br>Through Visuals
+                    </h2>
+                    <p class="reveal delay-200 mt-6 text-sm font-light leading-relaxed text-slate-400">
+                        Hey there! I'm Samrath Gupta, a passionate Video Editor & Graphic Designer with 2 years of experience. Currently studying in Class 9th at Kendriya Vidyalaya, I'm fluent in both Hindi and English.
+                    </p>
+                    <p class="reveal delay-300 mt-4 text-sm font-light leading-relaxed text-slate-400">
+                        I specialize in editing YouTube videos, reels, promos, and social media content. My editing style focuses on clean cuts, smooth transitions, and maintaining a strong flow throughout each video. As both a video editor and graphic designer, I bring visual creativity and storytelling together to make engaging, professional content.
+                    </p>
+
+                    <!-- Info grid -->
+                    <div class="reveal delay-400 mt-8 grid grid-cols-2 gap-4">
+                        <div class="glass-panel rounded-xl p-4">
+                            <div class="text-[11px] text-slate-500 uppercase tracking-wider">Name</div>
+                            <div class="text-sm font-medium mt-1">Samrath Gupta</div>
+                        </div>
+                        <div class="glass-panel rounded-xl p-4">
+                            <div class="text-[11px] text-slate-500 uppercase tracking-wider">Age</div>
+                            <div class="text-sm font-medium mt-1">17 Years</div>
+                        </div>
+                        <div class="glass-panel rounded-xl p-4">
+                            <div class="text-[11px] text-slate-500 uppercase tracking-wider">School</div>
+                            <div class="text-sm font-medium mt-1">KV School</div>
+                        </div>
+                        <div class="glass-panel rounded-xl p-4">
+                            <div class="text-[11px] text-slate-500 uppercase tracking-wider">Languages</div>
+                            <div class="text-sm font-medium mt-1">Hindi & English</div>
+                        </div>
+                    </div>
+
+                    <!-- Download resume button -->
+                    <div class="reveal delay-500 mt-8">
+                        <button onclick="showToast('Resume download started!')" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-xs font-semibold text-white transition-all duration-300 hover:bg-white/5" style="border: 1px solid rgba(255,255,255,0.1);">
+                            <span class="iconify" data-icon="lucide:download" data-width="14"></span>
+                            Download Resume
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-24 md:py-32 px-6 relative">
+        <div class="absolute inset-0" style="background: radial-gradient(ellipse at center, rgba(49,46,129,0.1), #030304, #030304);"></div>
+        <div class="max-w-7xl mx-auto relative">
+            <!-- Header -->
+            <div class="text-center mb-16">
+                <span class="reveal text-[11px] font-semibold uppercase tracking-widest text-indigo-400">My Skills</span>
+                <h2 class="reveal delay-100 mt-4 text-3xl md:text-4xl font-medium tracking-tight gradient-text">Tools & Expertise</h2>
+                <p class="reveal delay-200 mt-4 text-sm font-light text-slate-500 max-w-xl mx-auto">
+                    Proficient in industry-standard tools for both video editing and graphic design
+                </p>
+            </div>
+
+            <!-- Skill cards -->
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                <!-- Premiere Pro -->
+                <div class="reveal hover-card gradient-border rounded-2xl p-6">
+                    <div class="w-12 h-12 rounded-xl flex items-center justify-center mb-5" style="background: rgba(99,102,241,0.1); border: 1px solid rgba(99,102,241,0.2);">
+                        <span class="iconify text-indigo-400" data-icon="simple-icons:adobepremierepro" data-width="24"></span>
+                    </div>
+                    <h3 class="text-base font-medium">Adobe Premiere Pro</h3>
+                    <p class="text-xs text-slate-500 mt-2 leading-relaxed">Professional video editing, timeline management, and color grading</p>
+                    <div class="mt-4 h-1.5 rounded-full bg-white/5 overflow-hidden">
+                        <div class="skill-fill h-full rounded-full" style="background: linear-gradient(to right, #6366f1, #a855f7);" data-width="90%"></div>
+                    </div>
+                    <div class="text-right text-[11px] text-indigo-400 mt-1.5 font-medium">90%</div>
+                </div>
+
+                <!-- After Effects -->
+                <div class="reveal delay-100 hover-card gradient-border rounded-2xl p-6">
+                    <div class="w-12 h-12 rounded-xl flex items-center justify-center mb-5" style="background: rgba(168,85,247,0.1); border: 1px solid rgba(168,85,247,0.2);">
+                        <span class="iconify text-purple-400" data-icon="simple-icons:adobeaftereffects" data-width="24"></span>
+                    </div>
+                    <h3 class="text-base font-medium">After Effects</h3>
+                    <p class="text-xs text-slate-500 mt-2 leading-relaxed">Motion graphics, visual effects, and animated typography</p>
+                    <div class="mt-4 h-1.5 rounded-full bg-white/5 overflow-hidden">
+                        <div class="skill-fill h-full rounded-full" style="background: linear-gradient(to right, #a855f7, #ec4899);" data-width="80%"></div>
+                    </div>
+                    <div class="text-right text-[11px] text-purple-400 mt-1.5 font-medium">80%</div>
+                </div>
+
+                <!-- Photoshop -->
+                <div class="reveal delay-200 hover-card gradient-border rounded-2xl p-6">
+                    <div class="w-12 h-12 rounded-xl flex items-center justify-center mb-5" style="background: rgba(59,130,246,0.1); border: 1px solid rgba(59,130,246,0.2);">
+                        <span class="iconify text-blue-400" data-icon="simple-icons:adobephotoshop" data-width="24"></span>
+                    </div>
+                    <h3 class="text-base font-medium">Adobe Photoshop</h3>
+                    <p class="text-xs text-slate-500 mt-2 leading-relaxed">Photo manipulation, compositing, and digital artwork creation</p>
+                    <div class="mt-4 h-1.5 rounded-full bg-white/5 overflow-hidden">
+                        <div class="skill-fill h-full rounded-full" style="background: linear-gradient(to right, #3b82f6, #6366f1);" data-width="85%"></div>
+                    </div>
+                    <div class="text-right text-[11px] text-blue-400 mt-1.5 font-medium">85%</div>
+                </div>
+
+                <!-- Canva -->
+                <div class="reveal hover-card gradient-border rounded-2xl p-6">
+                    <div class="w-12 h-12 rounded-xl flex items-center justify-center mb-5" style="background: rgba(16,185,129,0.1); border: 1px solid rgba(16,185,129,0.2);">
+                        <span class="iconify text-emerald-400" data-icon="simple-icons:canva" data-width="24"></span>
+                    </div>
+                    <h3 class="text-base font-medium">Canva</h3>
+                    <p class="text-xs text-slate-500 mt-2 leading-relaxed">Quick design creation, social media templates, and branding</p>
+                    <div class="mt-4 h-1.5 rounded-full bg-white/5 overflow-hidden">
+                        <div class="skill-fill h-full rounded-full" style="background: linear-gradient(to right, #10B981, #14b8a6);" data-width="92%"></div>
+                    </div>
+                    <div class="text-right text-[11px] text-emerald-400 mt-1.5 font-medium">92%</div>
+                </div>
+
+                <!-- CapCut -->
+                <div class="reveal delay-100 hover-card gradient-border rounded-2xl p-6">
+                    <div class="w-12 h-12 rounded-xl flex items-center justify-center mb-5" style="background: rgba(251,191,36,0.1); border: 1px solid rgba(251,191,36,0.2);">
+                        <span class="iconify text-amber-400" data-icon="lucide:video" data-width="24"></span>
+                    </div>
+                    <h3 class="text-base font-medium">CapCut</h3>
+                    <p class="text-xs text-slate-500 mt-2 leading-relaxed">Reels, shorts editing, trending effects and transitions</p>
+                    <div class="mt-4 h-1.5 rounded-full bg-white/5 overflow-hidden">
+                        <div class="skill-fill h-full rounded-full" style="background: linear-gradient(to right, #fbbf24, #f59e0b);" data-width="95%"></div>
+                    </div>
+                    <div class="text-right text-[11px] text-amber-400 mt-1.5 font-medium">95%</div>
+                </div>
+
+                <!-- Illustrator -->
+                <div class="reveal delay-200 hover-card gradient-border rounded-2xl p-6">
+                    <div class="w-12 h-12 rounded-xl flex items-center justify-center mb-5" style="background: rgba(249,115,22,0.1); border: 1px solid rgba(249,115,22,0.2);">
+                        <span class="iconify text-orange-400" data-icon="simple-icons:adobeillustrator" data-width="24"></span>
+                    </div>
+                    <h3 class="text-base font-medium">Adobe Illustrator</h3>
+                    <p class="text-xs text-slate-500 mt-2 leading-relaxed">Vector graphics, logo design, and illustration work</p>
+                    <div class="mt-4 h-1.5 rounded-full bg-white/5 overflow-hidden">
+                        <div class="skill-fill h-full rounded-full" style="background: linear-gradient(to right, #f97316, #ef4444);" data-width="70%"></div>
+                    </div>
+                    <div class="text-right text-[11px] text-orange-400 mt-1.5 font-medium">70%</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-24 md:py-32 px-6">
+        <div class="max-w-7xl mx-auto">
+            <!-- Header -->
+            <div class="text-center mb-16">
+                <span class="reveal text-[11px] font-semibold uppercase tracking-widest text-indigo-400">What I Offer</span>
+                <h2 class="reveal delay-100 mt-4 text-3xl md:text-4xl font-medium tracking-tight gradient-text">My Services</h2>
+                <p class="reveal delay-200 mt-4 text-sm font-light text-slate-500 max-w-xl mx-auto">
+                    End-to-end creative solutions tailored to your brand's needs
+                </p>
+            </div>
+
+            <!-- Services grid -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+                <!-- Service 1 -->
+                <div class="reveal group gradient-border rounded-2xl p-7 hover-card cursor-default">
+                    <div class="flex items-center justify-between mb-5">
+                        <div class="w-11 h-11 rounded-lg flex items-center justify-center" style="background: rgba(99,102,241,0.1); border: 1px solid rgba(99,102,241,0.15);">
+                            <span class="iconify text-indigo-400" data-icon="lucide:youtube" data-width="20"></span>
+                        </div>
+                        <span class="iconify text-slate-700 group-hover:text-slate-500 group-hover:translate-x-1 transition-all duration-300" data-icon="lucide:arrow-up-right" data-width="18"></span>
+                    </div>
+                    <h3 class="text-base font-medium">YouTube Video Editing</h3>
+                    <p class="text-xs text-slate-500 mt-2 leading-relaxed">Full video editing for YouTube channels including cuts, transitions, effects, color grading, and thumbnail creation.</p>
+                    <div class="mt-5 flex flex-wrap gap-2">
+                        <span class="text-[10px] px-2.5 py-1 rounded-full text-slate-400" style="background: rgba(255,255,255,0.05);">Long-form</span>
+                        <span class="text-[10px] px-2.5 py-1 rounded-full text-slate-400" style="background: rgba(255,255,255,0.05);">Shorts</span>
+                        <span class="text-[10px] px-2.5 py-1 rounded-full text-slate-400" style="background: rgba(255,255,255,0.05);">Thumbnails</span>
+                    </div>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="reveal delay-100 group gradient-border rounded-2xl p-7 hover-card cursor-default">
+                    <div class="flex items-center justify-between mb-5">
+                        <div class="w-11 h-11 rounded-lg flex items-center justify-center" style="background: rgba(168,85,247,0.1); border: 1px solid rgba(168,85,247,0.15);">
+                            <span class="iconify text-purple-400" data-icon="lucide:instagram" data-width="20"></span>
+                        </div>
+                        <span class="iconify text-slate-700 group-hover:text-slate-500 group-hover:translate-x-1 transition-all duration-300" data-icon="lucide:arrow-up-right" data-width="18"></span>
+                    </div>
+                    <h3 class="text-base font-medium">Reels & Short Content</h3>
+                    <p class="text-xs text-slate-500 mt-2 leading-relaxed">Catchy reels and short-form content with trending effects, smooth transitions, and engaging pacing for maximum reach.</p>
+                    <div class="mt-5 flex flex-wrap gap-2">
+                        <span class="text-[10px] px-2.5 py-1 rounded-full text-slate-400" style="background: rgba(255,255,255,0.05);">Instagram</span>
+                        <span class="text-[10px] px-2.5 py-1 rounded-full text-slate-400" style="background: rgba(255,255,255,0.05);">YouTube Shorts</span>
+                        <span class="text-[10px] px-2.5 py-1 rounded-full text-slate-400" style="background: rgba(255,255,255,0.05);">Trending</span>
+                    </div>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="reveal delay-200 group gradient-border rounded-2xl p-7 hover-card cursor-default">
+                    <div class="flex items-center justify-between mb-5">
+                        <div class="w-11 h-11 rounded-lg flex items-center justify-center" style="background: rgba(244,63,94,0.1); border: 1px solid rgba(244,63,94,0.15);">
+                            <span class="iconify text-rose-400" data-icon="lucide:megaphone" data-width="20"></span>
+                        </div>
+                        <span class="iconify text-slate-700 group-hover:text-slate-500 group-hover:translate-x-1 transition-all duration-300" data-icon="lucide:arrow-up-right" data-width="18"></span>
+                    </div>
+                    <h3 class="text-base font-medium">Promo Videos</h3>
+                    <p class="text-xs text-slate-500 mt-2 leading-relaxed">High-impact promotional videos for products, brands, or events with professional storytelling and visual effects.</p>
+                    <div class="mt-5 flex flex-wrap gap-2">
+                        <span class="text-[10px] px-2.5 py-1 rounded-full text-slate-400" style="background: rgba(255,255,255,0.05);">Products</span>
+                        <span class="text-[10px] px-2.5 py-1 rounded-full text-slate-400" style="background: rgba(255,255,255,0.05);">Brands</span>
+                        <span class="text-[10px] px-2.5 py-1 rounded-full text-slate-400" style="background: rgba(255,255,255,0.05);">Events</span>
+                    </div>
+                </div>
+
+                <!-- Service 4 -->
+                <div class="reveal group gradient-border rounded-2xl p-7 hover-card cursor-default">
+                    <div class="flex items-center justify-between mb-5">
+                        <div class="w-11 h-11 rounded-lg flex items-center justify-center" style="background: rgba(16,185,129,0.1); border: 1px solid rgba(16,185,129,0.15);">
+                            <span class="iconify text-emerald-400" data-icon="lucide:image" data-width="20"></span>
+                        </div>
+                        <span class="iconify text-slate-700 group-hover:text-slate-500 group-hover:translate-x-1 transition-all duration-300" data-icon="lucide:arrow-up-right" data-width="18"></span>
+                    </div>
+                    <h3 class="text-base font-medium">Graphic Design</h3>
+                    <p class="text-xs text-slate-500 mt-2 leading-relaxed">Social media posts, banners, posters, and brand collateral designed with modern aesthetics and clean layouts.</p>
+                    <div class="mt-5 flex flex-wrap gap-2">
+                        <span class="text-[10px] px-2.5 py-1 rounded-full text-slate-400" style="background: rgba(255,255,255,0.05);">Posts</span>
+                        <span class="text-[10px] px-2.5 py-1 rounded-full text-slate-400" style="background: rgba(255,255,255,0.05);">Banners</span>
+                        <span class="text-[10px] px-2.5 py-1 rounded-full text-slate-400" style="background: rgba(255,255,255,0.05);">Posters</span>
+                    </div>
+                </div>
+
+                <!-- Service 5 -->
+                <div class="reveal delay-100 group gradient-border rounded-2xl p-7 hover-card cursor-default">
+                    <div class="flex items-center justify-between mb-5">
+                        <div class="w-11 h-11 rounded-lg flex items-center justify-center" style="background: rgba(59,130,246,0.1); border: 1px solid rgba(59,130,246,0.15);">
+                            <span class="iconify text-blue-400" data-icon="lucide:image-play" data-width="20"></span>
+                        </div>
+                        <span class="iconify text-slate-700 group-hover:text-slate-500 group-hover:translate-x-1 transition-all duration-300" data-icon="lucide:arrow-up-right" data-width="18"></span>
+                    </div>
+                    <h3 class="text-base font-medium">Thumbnail Design</h3>
+                    <p class="text-xs text-slate-500 mt-2 leading-relaxed">Click-worthy YouTube thumbnails that boost CTR with bold typography, vibrant colors, and compelling compositions.</p>
+                    <div class="mt-5 flex flex-wrap gap-2">
+                        <span class="text-[10px] px-2.5 py-1 rounded-full text-slate-400" style="background: rgba(255,255,255,0.05);">YouTube</span>
+                        <span class="text-[10px] px-2.5 py-1 rounded-full text-slate-400" style="background: rgba(255,255,255,0.05);">High CTR</span>
+                        <span class="text-[10px] px-2.5 py-1 rounded-full text-slate-400" style="background: rgba(255,255,255,0.05);">Custom</span>
+                    </div>
+                </div>
+
+                <!-- Service 6 -->
+                <div class="reveal delay-200 group gradient-border rounded-2xl p-7 hover-card cursor-default">
+                    <div class="flex items-center justify-between mb-5">
+                        <div class="w-11 h-11 rounded-lg flex items-center justify-center" style="background: rgba(251,191,36,0.1); border: 1px solid rgba(251,191,36,0.15);">
+                            <span class="iconify text-amber-400" data-icon="lucide:wand-2" data-width="20"></span>
+                        </div>
+                        <span class="iconify text-slate-700 group-hover:text-slate-500 group-hover:translate-x-1 transition-all duration-300" data-icon="lucide:arrow-up-right" data-width="18"></span>
+                    </div>
+                    <h3 class="text-base font-medium">Motion Graphics</h3>
+                    <p class="text-xs text-slate-500 mt-2 leading-relaxed">Animated intros, lower thirds, text animations, and logo reveals that add a dynamic touch to any video.</p>
+                    <div class="mt-5 flex flex-wrap gap-2">
+                        <span class="text-[10px] px-2.5 py-1 rounded-full text-slate-400" style="background: rgba(255,255,255,0.05);">Intros</span>
+                        <span class="text-[10px] px-2.5 py-1 rounded-full text-slate-400" style="background: rgba(255,255,255,0.05);">Logo Reveal</span>
+                        <span class="text-[10px] px-2.5 py-1 rounded-full text-slate-400" style="background: rgba(255,255,255,0.05);">Text Anim</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="py-24 md:py-32 px-6 relative">
+        <div class="absolute inset-0" style="background: radial-gradient(ellipse at top, rgba(49,46,129,0.08), #030304 70%);"></div>
+        <div class="max-w-7xl mx-auto relative">
+            <!-- Header -->
+            <div class="text-center mb-16">
+                <span class="reveal text-[11px] font-semibold uppercase tracking-widest text-indigo-400">Portfolio</span>
+                <h2 class="reveal delay-100 mt-4 text-3xl md:text-4xl font-medium tracking-tight gradient-text">Selected Work</h2>
+                <p class="reveal delay-200 mt-4 text-sm font-light text-slate-500 max-w-xl mx-auto">
+                    A showcase of my recent projects across video editing and graphic design
+                </p>
+            </div>
+
+            <!-- Filter tabs -->
+            <div class="reveal delay-200 flex items-center justify-center gap-2 mb-12 flex-wrap">
+                <button class="filter-btn active text-xs font-medium px-5 py-2 rounded-full transition-all duration-300" data-filter="all">All Work</button>
+                <button class="filter-btn text-xs font-medium px-5 py-2 rounded-full transition-all duration-300 text-slate-500 hover:text-white" data-filter="video">Video Editing</button>
+                <button class="filter-btn text-xs font-medium px-5 py-2 rounded-full transition-all duration-300 text-slate-500 hover:text-white" data-filter="design">Graphic Design</button>
+                <button class="filter-btn text-xs font-medium px-5 py-2 rounded-full transition-all duration-300 text-slate-500 hover:text-white" data-filter="thumbnail">Thumbnails</button>
+            </div>
+
+            <!-- Portfolio grid -->
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5" id="portfolioGrid">
+                <!-- Item 1 -->
+                <div class="reveal portfolio-card rounded-2xl overflow-hidden cursor-pointer group" data-category="video" style="border: 1px solid rgba(255,255,255,0.05);">
+                    <div class="relative aspect-video overflow-hidden">
+                        <img src="https://picsum.photos/seed/youtube-edit-1/600/340.jpg" alt="YouTube Video Edit" loading="lazy" class="portfolio-img w-full h-full object-cover transition-transform duration-500">
+                        <div class="portfolio-overlay absolute inset-0 bg-black/60 flex items-center justify-center">
+                            <div class="w-12 h-12 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
+                                <span class="iconify text-white" data-icon="lucide:play" data-width="20"></span>
+                            </div>
+                        </div>
+                        <div class="absolute top-3 left-3 text-[10px] font-semibold px-2.5 py-1 rounded-full bg-indigo-500/80 backdrop-blur-sm">Video</div>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="text-sm font-medium">YouTube Travel Vlog Edit</h3>
+                        <p class="text-xs text-slate-500 mt-1">Clean cuts with cinematic color grading</p>
+                    </div>
+                </div>
+
+                <!-- Item 2 -->
+                <div class="reveal delay-100 portfolio-card rounded-2xl overflow-hidden cursor-pointer group" data-category="design" style="border: 1px solid rgba(255,255,255,0.05);">
+                    <div class="relative aspect-video overflow-hidden">
+                        <img src="https://picsum.photos/seed/graphic-poster/600/340.jpg" alt="Brand Poster" loading="lazy" class="portfolio-img w-full h-full object-cover transition-transform duration-500">
+                        <div class="portfolio-overlay absolute inset-0 bg-black/60 flex items-center justify-center">
+                            <div class="w-12 h-12 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
+                                <span class="iconify text-white" data-icon="lucide:expand" data-width="20"></span>
+                            </div>
+                        </div>
+                        <div class="absolute top-3 left-3 text-[10px] font-semibold px-2.5 py-1 rounded-full bg-emerald-500/80 backdrop-blur-sm">Design</div>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="text-sm font-medium">Event Brand Poster</h3>
+                        <p class="text-xs text-slate-500 mt-1">Modern minimalist poster design</p>
+                    </div>
+                </div>
+
+                <!-- Item 3 -->
+                <div class="reveal delay-200 portfolio-card rounded-2xl overflow-hidden cursor-pointer group" data-category="thumbnail" style="border: 1px solid rgba(255,255,255,0.05);">
+                    <div class="relative aspect-video overflow-hidden">
+                        <img src="https://picsum.photos/seed/thumb-click/600/340.jpg" alt="YouTube Thumbnail" loading="lazy" class="portfolio-img w-full h-full object-cover transition-transform duration-500">
+                        <div class="portfolio-overlay absolute inset-0 bg-black/60 flex items-center justify-center">
+                            <div class="w-12 h-12 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
+                                <span class="iconify text-white" data-icon="lucide:expand" data-width="20"></span>
+                            </div>
+                        </div>
+                        <div class="absolute top-3 left-3 text-[10px] font-semibold px-2.5 py-1 rounded-full bg-blue-500/80 backdrop-blur-sm">Thumbnail</div>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="text-sm font-medium">High-CTR YouTube Thumbnail</h3>
+                        <p class="text-xs text-slate-500 mt-1">Bold typography with vibrant colors</p>
+                    </div>
+                </div>
+
+                <!-- Item 4 -->
+                <div class="reveal portfolio-card rounded-2xl overflow-hidden cursor-pointer group" data-category="video" style="border: 1px solid rgba(255,255,255,0.05);">
+                    <div class="relative aspect-video overflow-hidden">
+                        <img src="https://picsum.photos/seed/reels-edit/600/340.jpg" alt="Instagram Reel" loading="lazy" class="portfolio-img w-full h-full object-cover transition-transform duration-500">
+                        <div class="portfolio-overlay absolute inset-0 bg-black/60 flex items-center justify-center">
+                            <div class="w-12 h-12 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
+                                <span class="iconify text-white" data-icon="lucide:play" data-width="20"></span>
+                            </div>
+                        </div>
+                        <div class="absolute top-3 left-3 text-[10px] font-semibold px-2.5 py-1 rounded-full bg-indigo-500/80 backdrop-blur-sm">Video</div>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="text-sm font-medium">Instagram Reel — Product Showcase</h3>
+                        <p class="text-xs text-slate-500 mt-1">Trending transitions with beat sync</p>
+                    </div>
+                </div>
+
+                <!-- Item 5 -->
+                <div class="reveal delay-100 portfolio-card rounded-2xl overflow-hidden cursor-pointer group" data-category="design" style="border: 1px solid rgba(255,255,255,0.05);">
+                    <div class="relative aspect-video overflow-hidden">
+                        <img src="https://picsum.photos/seed/social-media-design/600/340.jpg" alt="Social Media Design" loading="lazy" class="portfolio-img w-full h-full object-cover transition-transform duration-500">
+                        <div class="portfolio-overlay absolute inset-0 bg-black/60 flex items-center justify-center">
+                            <div class="w-12 h-12 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
+                                <span class="iconify text-white" data-icon="lucide:expand" data-width="20"></span>
+                            </div>
+                        </div>
+                        <div class="absolute top-3 left-3 text-[10px] font-semibold px-2.5 py-1 rounded-full bg-emerald-500/80 backdrop-blur-sm">Design</div>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="text-sm font-medium">Social Media Post Pack</h3>
+                        <p class="text-xs text-slate-500 mt-1">Consistent brand identity across platforms</p>
+                    </div>
+                </div>
+
+                <!-- Item 6 -->
+                <div class="reveal delay-200 portfolio-card rounded-2xl overflow-hidden cursor-pointer group" data-category="video" style="border: 1px solid rgba(255,255,255,0.05);">
+                    <div class="relative aspect-video overflow-hidden">
+                        <img src="https://picsum.photos/seed/promo-video-edit/600/340.jpg" alt="Promo Video" loading="lazy" class="portfolio-img w-full h-full object-cover transition-transform duration-500">
+                        <div class="portfolio-overlay absolute inset-0 bg-black/60 flex items-center justify-center">
+                            <div class="w-12 h-12 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
+                                <span class="iconify text-white" data-icon="lucide:play" data-width="20"></span>
+                            </div>
+                        </div>
+                        <div class="absolute top-3 left-3 text-[10px] font-semibold px-2.5 py-1 rounded-full bg-indigo-500/80 backdrop-blur-sm">Video</div>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="text-sm font-medium">Brand Promo Video</h3>
+                        <p class="text-xs text-slate-500 mt-1">Professional storytelling with motion graphics</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="py-24 md:py-32 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <span class="reveal text-[11px] font-semibold uppercase tracking-widest text-indigo-400">Testimonials</span>
+                <h2 class="reveal delay-100 mt-4 text-3xl md:text-4xl font-medium tracking-tight gradient-text">Client Feedback</h2>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-5">
+                <!-- Testimonial 1 -->
+                <div class="reveal gradient-border rounded-2xl p-7 hover-card">
+                    <div class="flex items-center gap-1 mb-4">
+                        <span class="iconify text-amber-400" data-icon="lucide:star" data-width="14"></span>
+                        <span class="iconify text-amber-400" data-icon="lucide:star" data-width="14"></span>
+                        <span class="iconify text-amber-400" data-icon="lucide:star" data-width="14"></span>
+                        <span class="iconify text-amber-400" data-icon="lucide:star" data-width="14"></span>
+                        <span class="iconify text-amber-400" data-icon="lucide:star" data-width="14"></span>
+                    </div>
+                    <p class="text-sm font-light text-slate-400 leading-relaxed">"Samrath edited 10+ videos for my channel. His transitions are smooth and he really understands YouTube pacing. Views went up 40%!"</p>
+                    <div class="flex items-center gap-3 mt-5 pt-5" style="border-top: 1px solid rgba(255,255,255,0.05);">
+                        <div class="w-9 h-9 rounded-full flex items-center justify-center text-xs font-semibold" style="background: linear-gradient(135deg, #6366f1, #a855f7);">R</div>
+                        <div>
+                            <div class="text-xs font-medium">Rahul Verma</div>
+                            <div class="text-[11px] text-slate-500">YouTuber, 50K Subs</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 2 -->
+                <div class="reveal delay-100 gradient-border rounded-2xl p-7 hover-card">
+                    <div class="flex items-center gap-1 mb-4">
+                        <span class="iconify text-amber-400" data-icon="lucide:star" data-width="14"></span>
+                        <span class="iconify text-amber-400" data-icon="lucide:star" data-width="14"></span>
+                        <span class="iconify text-amber-400" data-icon="lucide:star" data-width="14"></span>
+                        <span class="iconify text-amber-400" data-icon="lucide:star" data-width="14"></span>
+                        <span class="iconify text-amber-400" data-icon="lucide:star" data-width="14"></span>
+                    </div>
+                    <p class="text-sm font-light text-slate-400 leading-relaxed">"Amazing thumbnail designs! My CTR jumped from 4% to 9% after Samrath started making my thumbnails. Highly recommend!"</p>
+                    <div class="flex items-center gap-3 mt-5 pt-5" style="border-top: 1px solid rgba(255,255,255,0.05);">
+                        <div class="w-9 h-9 rounded-full flex items-center justify-center text-xs font-semibold" style="background: linear-gradient(135deg, #10B981, #14b8a6);">P</div>
+                        <div>
+                            <div class="text-xs font-medium">Priya Sharma</div>
+                            <div class="text-[11px] text-slate-500">Content Creator</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 3 -->
+                <div class="reveal delay-200 gradient-border rounded-2xl p-7 hover-card">
+                    <div class="flex items-center gap-1 mb-4">
+                        <span class="iconify text-amber-400" data-icon="lucide:star" data-width="14"></span>
+                        <span class="iconify text-amber-400" data-icon="lucide:star" data-width="14"></span>
+                        <span class="iconify text-amber-400" data-icon="lucide:star" data-width="14"></span>
+                        <span class="iconify text-amber-400" data-icon="lucide:star" data-width="14"></span>
+                        <span class="iconify text-amber-400" data-icon="lucide:star" data-width="14"></span>
+                    </div>
+                    <p class="text-sm font-light text-slate-400 leading-relaxed">"He designed our entire social media kit — posts, stories, banners. Very creative and always delivers on time. Great for a school project too!"</p>
+                    <div class="flex items-center gap-3 mt-5 pt-5" style="border-top: 1px solid rgba(255,255,255,0.05);">
+                        <div class="w-9 h-9 rounded-full flex items-center justify-center text-xs font-semibold" style="background: linear-gradient(135deg, #f97316, #ef4444);">A</div>
+                        <div>
+                            <div class="text-xs font-medium">Amit Patel</div>
+                            <div class="text-[11px] text-slate-500">Local Business Owner</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- My Process Section -->
+    <section class="py-24 md:py-32 px-6 relative">
+        <div class="absolute inset-0" style="background: radial-gradient(ellipse at bottom, rgba(49,46,129,0.08), #030304 70%);"></div>
+        <div class="max-w-4xl mx-auto relative">
+            <div class="text-center mb-16">
+                <span class="reveal text-[11px] font-semibold uppercase tracking-widest text-indigo-400">My Process</span>
+                <h2 class="reveal delay-100 mt-4 text-3xl md:text-4xl font-medium tracking-tight gradient-text">How I Work</h2>
+            </div>
+
+            <div class="relative pl-12">
+                <div class="timeline-line"></div>
+
+                <!-- Step 1 -->
+                <div class="reveal relative pb-12">
+                    <div class="timeline-dot"></div>
+                    <div class="gradient-border rounded-2xl p-6 hover-card">
+                        <div class="flex items-center gap-3 mb-3">
+                            <span class="text-[10px] font-semibold px-2.5 py-1 rounded-full text-indigo-300" style="background: rgba(99,102,241,0.15);">Step 01</span>
+                        </div>
+                        <h3 class="text-base font-medium">Understanding the Vision</h3>
+                        <p class="text-xs text-slate-500 mt-2 leading-relaxed">I start by understanding your requirements, target audience, and creative vision through a detailed discussion.</p>
+                    </div>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="reveal delay-100 relative pb-12">
+                    <div class="timeline-dot"></div>
+                    <div class="gradient-border rounded-2xl p-6 hover-card">
+                        <div class="flex items-center gap-3 mb-3">
+                            <span class="text-[10px] font-semibold px-2.5 py-1 rounded-full text-indigo-300" style="background: rgba(99,102,241,0.15);">Step 02</span>
+                        </div>
+                        <h3 class="text-base font-medium">Planning & Storyboarding</h3>
+                        <p class="text-xs text-slate-500 mt-2 leading-relaxed">I plan the structure, select the right music, and create a flow that keeps viewers engaged from start to finish.</p>
+                    </div>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="reveal delay-200 relative pb-12">
+                    <div class="timeline-dot"></div>
+                    <div class="gradient-border rounded-2xl p-6 hover-card">
+                        <div class="flex items-center gap-3 mb-3">
+                            <span class="text-[10px] font-semibold px-2.5 py-1 rounded-full text-indigo-300" style="background: rgba(99,102,241,0.15);">Step 03</span>
+                        </div>
+                        <h3 class="text-base font-medium">Editing & Designing</h3>
+                        <p class="text-xs text-slate-500 mt-2 leading-relaxed">The magic happens here — clean cuts, smooth transitions, color grading, effects, and graphic elements come together.</p>
+                    </div>
+                </div>
+
+                <!-- Step 4 -->
+                <div class="reveal delay-300 relative">
+                    <div class="timeline-dot" style="background: #10B981; box-shadow: 0 0 10px rgba(16,185,129,0.5);"></div>
+                    <div class="gradient-border rounded-2xl p-6 hover-card">
+                        <div class="flex items-center gap-3 mb-3">
+                            <span class="text-[10px] font-semibold px-2.5 py-1 rounded-full text-emerald-300" style="background: rgba(16,185,129,0.15);">Step 04</span>
+                        </div>
+                        <h3 class="text-base font-medium">Review & Delivery</h3>
+                        <p class="text-xs text-slate-500 mt-2 leading-relaxed">I share the draft for your feedback, make revisions, and deliver the final polished content in your preferred format.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-24 md:py-32 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-2 gap-16">
+                <!-- Left: Info -->
+                <div>
+                    <span class="reveal text-[11px] font-semibold uppercase tracking-widest text-indigo-400">Get In Touch</span>
+                    <h2 class="reveal delay-100 mt-4 text-3xl md:text-4xl font-medium tracking-tight gradient-text">
+                        Let's Create<br>Something Amazing
+                    </h2>
+                    <p class="reveal delay-200 mt-6 text-sm font-light leading-relaxed text-slate-400">
+                        Have a project in mind? Whether it's a YouTube video, social media content, or graphic design work — I'd love to hear about it. Let's bring your ideas to life!
+                    </p>
+
+                    <!-- Contact info -->
+                    <div class="reveal delay-300 mt-8 space-y-5">
+                        <div class="flex items-center gap-4">
+                            <div class="w-10 h-10 rounded-lg flex items-center justify-center" style="background: rgba(99,102,241,0.1); border: 1px solid rgba(99,102,241,0.15);">
+                                <span class="iconify text-indigo-400" data-icon="lucide:mail" data-width="18"></span>
+                            </div>
+                            <div>
+                                <div class="text-[11px] text-slate-500 uppercase tracking-wider">Email</div>
+                                <div class="text-sm font-medium">samrathgupta@email.com</div>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <div class="w-10 h-10 rounded-lg flex items-center justify-center" style="background: rgba(99,102,241,0.1); border: 1px solid rgba(99,102,241,0.15);">
+                                <span class="iconify text-indigo-400" data-icon="lucide:phone" data-width="18"></span>
+                            </div>
+                            <div>
+                                <div class="text-[11px] text-slate-500 uppercase tracking-wider">Phone</div>
+                                <div class="text-sm font-medium">+91 XXXXX XXXXX</div>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <div class="w-10 h-10 rounded-lg flex items-center justify-center" style="background: rgba(99,102,241,0.1); border: 1px solid rgba(99,102,241,0.15);">
+                                <span class="iconify text-indigo-400" data-icon="lucide:map-pin" data-width="18"></span>
+                            </div>
+                            <div>
+                                <div class="text-[11px] text-slate-500 uppercase tracking-wider">Location</div>
+                                <div class="text-sm font-medium">India</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Social links -->
+                    <div class="reveal delay-400 mt-8 flex items-center gap-3">
+                        <a href="#" class="w-10 h-10 rounded-lg flex items-center justify-center text-slate-500 hover:text-white hover:bg-white/5 transition-all duration-300" style="border: 1px solid rgba(255,255,255,0.08);">
+                            <span class="iconify" data-icon="lucide:instagram" data-width="18"></span>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-lg flex items-center justify-center text-slate-500 hover:text-white hover:bg-white/5 transition-all duration-300" style="border: 1px solid rgba(255,255,255,0.08);">
+                            <span class="iconify" data-icon="lucide:youtube" data-width="18"></span>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-lg flex items-center justify-center text-slate-500 hover:text-white hover:bg-white/5 transition-all duration-300" style="border: 1px solid rgba(255,255,255,0.08);">
+                            <span class="iconify" data-icon="simple-icons:twitter" data-width="16"></span>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-lg flex items-center justify-center text-slate-500 hover:text-white hover:bg-white/5 transition-all duration-300" style="border: 1px solid rgba(255,255,255,0.08);">
+                            <span class="iconify" data-icon="lucide:linkedin" data-width="18"></span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Right: Form -->
+                <div class="reveal delay-200">
+                    <form id="contactForm" class="gradient-border rounded-2xl p-7 space-y-5">
+                        <div>
+                            <label for="contactName" class="text-[11px] font-medium text-slate-400 uppercase tracking-wider block mb-2">Your Name</label>
+                            <input id="contactName" type="text" required placeholder="John Doe" class="w-full px-4 py-3 rounded-xl text-sm bg-white/[0.03] border border-white/[0.08] text-white placeholder-slate-600 focus:outline-none focus:border-indigo-500/50 transition-colors">
+                        </div>
+                        <div>
+                            <label for="contactEmail" class="text-[11px] font-medium text-slate-400 uppercase tracking-wider block mb-2">Email Address</label>
+                            <input id="contactEmail" type="email" required placeholder="john@example.com" class="w-full px-4 py-3 rounded-xl text-sm bg-white/[0.03] border border-white/[0.08] text-white placeholder-slate-600 focus:outline-none focus:border-indigo-500/50 transition-colors">
+                        </div>
+                        <div>
+                            <label for="contactService" class="text-[11px] font-medium text-slate-400 uppercase tracking-wider block mb-2">Service Needed</label>
+                            <select id="contactService" required class="w-full px-4 py-3 rounded-xl text-sm bg-white/[0.03] border border-white/[0.08] text-slate-400 focus:outline-none focus:border-indigo-500/50 transition-colors appearance-none cursor-pointer" style="background-image: url('data:image/svg+xml,%3Csvg fill=%27%2394a3b8%27 viewBox=%270 0 24 24%27 xmlns=%27http://www.w3.org/2000/svg%27%3E%3Cpath d=%27M7 10l5 5 5-5z%27/%3E%3C/svg%3E'); background-repeat: no-repeat; background-position: right 12px center; background-size: 18px;">
+                                <option value="" disabled selected>Select a service</option>
+                                <option value="youtube">YouTube Video Editing</option>
+                                <option value="reels">Reels & Short Content</option>
+                                <option value="promo">Promo Videos</option>
+                                <option value="graphic">Graphic Design</option>
+                                <option value="thumbnail">Thumbnail Design</option>
+                                <option value="motion">Motion Graphics</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="contactMessage" class="text-[11px] font-medium text-slate-400 uppercase tracking-wider block mb-2">Project Details</label>
+                            <textarea id="contactMessage" required rows="4" placeholder="Tell me about your project..." class="w-full px-4 py-3 rounded-xl text-sm bg-white/[0.03] border border-white/[0.08] text-white placeholder-slate-600 focus:outline-none focus:border-indigo-500/50 transition-colors resize-none"></textarea>
+                        </div>
+                        <button type="submit" class="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl text-sm font-semibold bg-white text-black hover:shadow-[0_0_20px_-5px_rgba(255,255,255,0.3)] transition-all duration-300">
+                            <span class="iconify" data-icon="lucide:send" data-width="16"></span>
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 px-6" style="border-top: 1px solid rgba(255,255,255,0.05);">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+                <!-- Logo -->
+                <div class="flex items-center gap-3">
+                    <div class="w-7 h-7 rounded-lg flex items-center justify-center text-xs font-semibold" style="background: linear-gradient(to top right, #6366f1, #a855f7);">S</div>
+                    <span class="text-sm font-medium">Samrath Gupta</span>
+                </div>
+
+                <!-- Links -->
+                <div class="flex items-center gap-6">
+                    <a href="#about" class="text-xs text-slate-500 hover:text-white transition-colors">About</a>
+                    <a href="#skills" class="text-xs text-slate-500 hover:text-white transition-colors">Skills</a>
+                    <a href="#services" class="text-xs text-slate-500 hover:text-white transition-colors">Services</a>
+                    <a href="#portfolio" class="text-xs text-slate-500 hover:text-white transition-colors">Portfolio</a>
+                    <a href="#contact" class="text-xs text-slate-500 hover:text-white transition-colors">Contact</a>
+                </div>
+
+                <!-- Copyright -->
+                <div class="text-xs text-slate-600">
+                    © <span id="copyrightYear">2025</span> Samrath Gupta. All rights reserved.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to top button -->
+    <button id="backToTop" aria-label="Back to top" class="fixed bottom-8 right-8 w-11 h-11 rounded-xl flex items-center justify-center z-40 transition-all duration-300 opacity-0 translate-y-4 pointer-events-none" style="background: rgba(99,102,241,0.2); border: 1px solid rgba(99,102,241,0.3); backdrop-filter: blur(10px);">
+        <span class="iconify text-indigo-400" data-icon="lucide:arrow-up" data-width="18"></span>
+    </button>
+
+    <script src="script.js"></script>
+</body>
+</html>
