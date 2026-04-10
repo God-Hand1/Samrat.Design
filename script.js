@@ -225,7 +225,34 @@ const contactForm = document.getElementById('contactForm');
 if (contactForm) {
     contactForm.addEventListener('submit', (e) => {
         e.preventDefault();
-        window.showToast('Message sent successfully! I\'ll get back to you soon.');
+        
+        // Get form values
+        const name = document.getElementById('contactName').value;
+        const email = document.getElementById('contactEmail').value;
+        const service = document.getElementById('contactService').value;
+        const message = document.getElementById('contactMessage').value;
+        
+        // Get service text instead of value
+        const serviceSelect = document.getElementById('contactService');
+        const serviceText = serviceSelect.options[serviceSelect.selectedIndex].text;
+        
+        // Compose email
+        const recipient = 'flic.editofficial@gmail.com';
+        const subject = encodeURIComponent(`Portfolio Contact: ${serviceText}`);
+        const body = encodeURIComponent(
+            `Name: ${name}\n` +
+            `Email: ${email}\n` +
+            `Service Needed: ${serviceText}\n\n` +
+            `Project Details:\n${message}`
+        );
+        
+        // Open Gmail compose with pre-filled data
+        window.open(`https://mail.google.com/mail/?view=cm&fs=1&to=${recipient}&su=${subject}&body=${body}`, '_blank');
+        
+        // Show success toast
+        window.showToast('Opening Gmail to send your message...');
+        
+        // Reset form
         e.target.reset();
     });
 }
