@@ -1,7 +1,7 @@
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body {
     font-family: 'Inter', sans-serif;
-    background: #030304;
+    background: #0a0a0f;
     color: #FFFFFF;
     overflow-x: hidden;
 }
@@ -44,7 +44,7 @@ body::before {
 
 /* Gradient text */
 .gradient-text {
-    background: linear-gradient(135deg, #FFFFFF 0%, #a5b4fc 100%);
+    background: linear-gradient(135deg, #FFFFFF 0%, #c7d2fe 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -53,9 +53,9 @@ body::before {
 
 /* Glass panel */
 .glass-panel {
-    background: rgba(255, 255, 255, 0.03);
+    background: rgba(255, 255, 255, 0.06);
     backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.12);
 }
 
 /* Hero glow */
@@ -63,7 +63,7 @@ body::before {
     position: absolute;
     width: 600px;
     height: 600px;
-    background: radial-gradient(circle at center, rgba(99,102,241,0.15) 0%, rgba(0,0,0,0) 70%);
+    background: radial-gradient(circle at center, rgba(99,102,241,0.25) 0%, rgba(0,0,0,0) 70%);
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -103,7 +103,7 @@ body::before {
 /* Gradient border card */
 .gradient-border {
     position: relative;
-    background: rgba(255,255,255,0.03);
+    background: rgba(255,255,255,0.05);
     border-radius: 16px;
     overflow: hidden;
 }
@@ -113,7 +113,7 @@ body::before {
     inset: 0;
     border-radius: 16px;
     padding: 1px;
-    background: linear-gradient(135deg, rgba(99,102,241,0.3), rgba(168,85,247,0.1), rgba(255,255,255,0.05));
+    background: linear-gradient(135deg, rgba(99,102,241,0.4), rgba(168,85,247,0.2), rgba(255,255,255,0.08));
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
@@ -133,7 +133,7 @@ body::before {
     position: fixed;
     width: 300px;
     height: 300px;
-    background: radial-gradient(circle, rgba(99,102,241,0.07) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(99,102,241,0.12) 0%, transparent 70%);
     border-radius: 50%;
     pointer-events: none;
     z-index: 9998;
@@ -156,7 +156,7 @@ html { scroll-behavior: smooth; }
     left: 50%;
     width: 0;
     height: 2px;
-    background: #6366f1;
+    background: #818cf8;
     transition: all 0.3s ease;
     transform: translateX(-50%);
     border-radius: 1px;
@@ -171,7 +171,7 @@ html { scroll-behavior: smooth; }
     transition: all 0.3s ease;
 }
 .hover-card:hover {
-    background: rgba(255,255,255,0.05);
+    background: rgba(255,255,255,0.08);
     transform: translateY(-4px);
 }
 
@@ -182,15 +182,15 @@ html { scroll-behavior: smooth; }
     top: 0;
     bottom: 0;
     width: 2px;
-    background: linear-gradient(to bottom, rgba(99,102,241,0.5), rgba(99,102,241,0.05));
+    background: linear-gradient(to bottom, rgba(129,140,248,0.6), rgba(129,140,248,0.1));
 }
 .timeline-dot {
     width: 12px;
     height: 12px;
     border-radius: 50%;
-    background: #6366f1;
-    border: 2px solid #030304;
-    box-shadow: 0 0 10px rgba(99,102,241,0.5);
+    background: #818cf8;
+    border: 2px solid #0a0a0f;
+    box-shadow: 0 0 12px rgba(129,140,248,0.6);
     position: absolute;
     left: 15px;
     top: 6px;
@@ -241,7 +241,7 @@ html { scroll-behavior: smooth; }
     display: inline-block;
     width: 3px;
     height: 1em;
-    background: #6366f1;
+    background: #818cf8;
     margin-left: 4px;
     animation: blink 1s step-end infinite;
     vertical-align: text-bottom;
