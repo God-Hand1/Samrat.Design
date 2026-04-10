@@ -259,3 +259,30 @@ html { scroll-behavior: smooth; }
     transform: scale(1.05);
 }
 
+
+/* Logo animation */
+.logo-icon {
+    opacity: 0;
+    transform: scale(0.8);
+    animation: logoIconAppear 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
+}
+
+.logo-text {
+    opacity: 0;
+    transform: translateX(-10px);
+    animation: logoTextSlide 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.5s forwards;
+}
+
+@keyframes logoIconAppear {
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes logoTextSlide {
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
