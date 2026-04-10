@@ -361,3 +361,80 @@ const copyrightYear = document.getElementById('copyrightYear');
 if (copyrightYear) {
     copyrightYear.textContent = new Date().getFullYear().toString();
 }
+
+// ===== Content Protection =====
+// Disable right-click
+document.addEventListener('contextmenu', (e) => {
+    e.preventDefault();
+    return false;
+});
+
+// Disable copy
+document.addEventListener('copy', (e) => {
+    e.preventDefault();
+    return false;
+});
+
+// Disable cut
+document.addEventListener('cut', (e) => {
+    e.preventDefault();
+    return false;
+});
+
+// Disable text selection on long press (mobile)
+document.addEventListener('selectstart', (e) => {
+    e.preventDefault();
+    return false;
+});
+
+// Disable long press context menu on mobile
+document.addEventListener('touchstart', (e) => {
+    if (e.touches.length > 1) {
+        e.preventDefault();
+    }
+}, { passive: false });
+
+document.addEventListener('touchend', (e) => {
+    const now = Date.now();
+    if (now - lastTouchEnd <= 300) {
+        e.preventDefault();
+    }
+    lastTouchEnd = now;
+}, false);
+
+let lastTouchEnd = 0;
+
+// Disable keyboard shortcuts for copy/paste
+document.addEventListener('keydown', (e) => {
+    // Disable Ctrl+C, Ctrl+X, Ctrl+V, Ctrl+A, Ctrl+U, Ctrl+S, F12
+    if (e.ctrlKey && (e.key === 'c' || e.key === 'x' || e.key === 'v' || e.key === 'a' || e.key === 'u' || e.key === 's')) {
+        e.preventDefault();
+        return false;
+    }
+    // Disable F12 (Developer Tools)
+    if (e.key === 'F12') {
+        e.preventDefault();
+        return false;
+    }
+    // Disable Ctrl+Shift+I (Developer Tools)
+    if (e.ctrlKey && e.shiftKey && e.key === 'I') {
+        e.preventDefault();
+        return false;
+    }
+    // Disable Ctrl+Shift+J (Console)
+    if (e.ctrlKey && e.shiftKey && e.key === 'J') {
+        e.preventDefault();
+        return false;
+    }
+    // Disable Ctrl+Shift+C (Inspect Element)
+    if (e.ctrlKey && e.shiftKey && e.key === 'C') {
+        e.preventDefault();
+        return false;
+    }
+});
+
+// Disable drag and drop
+document.addEventListener('dragstart', (e) => {
+    e.preventDefault();
+    return false;
+});
