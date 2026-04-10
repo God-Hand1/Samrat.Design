@@ -65,13 +65,13 @@ if (counters.length > 0) {
                 const targetAttr = entry.target.getAttribute('data-target');
                 const target = parseInt(targetAttr, 10);
                 if (isNaN(target)) return;
-                
+
                 let current = 0;
-                const duration = 1500; // 1.5s
+                const duration = 1500;
                 const stepTime = 25;
                 const steps = duration / stepTime;
                 const increment = target / steps;
-                
+
                 const timer = setInterval(() => {
                     current += increment;
                     if (current >= target) {
@@ -141,6 +141,13 @@ if (menuToggle && mobileMenu && menuIcon) {
         mobileMenu.classList.toggle('open', menuOpen);
         menuIcon.setAttribute('data-icon', menuOpen ? 'lucide:x' : 'lucide:menu');
     });
+
+    // Close mobile menu on Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && menuOpen) {
+            window.closeMobile();
+        }
+    });
 }
 
 window.closeMobile = function() {
@@ -154,6 +161,9 @@ window.closeMobile = function() {
 // ===== Portfolio Filter =====
 const filterBtns = document.querySelectorAll('.filter-btn');
 const portfolioItems = document.querySelectorAll('.portfolio-card');
+
+// Monotonic filter generation counter to avoid stale timeout race conditions
+let filterGeneration = 0;
 
 if (filterBtns.length > 0 && portfolioItems.length > 0) {
     const applyActiveStyles = (btn) => {
@@ -176,6 +186,8 @@ if (filterBtns.length > 0 && portfolioItems.length > 0) {
             applyActiveStyles(btn);
 
             const filter = btn.getAttribute('data-filter') || 'all';
+            filterGeneration++;
+            const currentGen = filterGeneration;
 
             portfolioItems.forEach(item => {
                 const category = item.getAttribute('data-category');
@@ -192,7 +204,8 @@ if (filterBtns.length > 0 && portfolioItems.length > 0) {
                     item.style.opacity = '0';
                     item.style.transform = 'scale(0.95)';
                     setTimeout(() => {
-                        if (item.style.opacity === '0') {
+                        // Only hide if this is still the active filter generation
+                        if (filterGeneration === currentGen) {
                             item.style.display = 'none';
                         }
                     }, 300);
@@ -230,22 +243,14 @@ window.showToast = function(msg) {
     }
 };
 
-// ===== Back to Top =====
+// ===== Back to Top (CSS class toggle instead of inline styles) =====
 const backToTop = document.getElementById('backToTop');
 if (backToTop) {
     let isScrolling = false;
     window.addEventListener('scroll', () => {
         if (!isScrolling) {
             window.requestAnimationFrame(() => {
-                if (window.scrollY > 500) {
-                    backToTop.style.opacity = '1';
-                    backToTop.style.transform = 'translateY(0)';
-                    backToTop.style.pointerEvents = 'auto';
-                } else {
-                    backToTop.style.opacity = '0';
-                    backToTop.style.transform = 'translateY(16px)';
-                    backToTop.style.pointerEvents = 'none';
-                }
+                backToTop.classList.toggle('visible', window.scrollY > 500);
                 isScrolling = false;
             });
             isScrolling = true;
@@ -266,9 +271,9 @@ if (sections.length > 0 && navLinks.length > 0) {
         id: section.getAttribute('id'),
         top: section.offsetTop - 150
     }));
-    
+
     let sectionTops = getSectionTops();
-    
+
     window.addEventListener('resize', () => {
         sectionTops = getSectionTops();
     }, { passive: true });
@@ -279,7 +284,7 @@ if (sections.length > 0 && navLinks.length > 0) {
             window.requestAnimationFrame(() => {
                 const scrollY = window.scrollY;
                 let current = '';
-                
+
                 for (let i = sectionTops.length - 1; i >= 0; i--) {
                     if (scrollY >= sectionTops[i].top) {
                         current = sectionTops[i].id;
@@ -313,7 +318,7 @@ if (!isTouchDevice) {
                         const rect = hero.getBoundingClientRect();
                         const x = ((e.clientX - rect.left) / rect.width - 0.5) * 2;
                         const y = ((e.clientY - rect.top) / rect.height - 0.5) * 2;
-                        
+
                         glow.style.transform = `translate(calc(-50% + ${x * 30}px), calc(-50% + ${y * 30}px))`;
                         isTiltMoving = false;
                     });
