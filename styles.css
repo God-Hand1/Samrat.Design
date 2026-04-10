@@ -17,8 +17,10 @@ body::before {
     content: '';
     position: fixed;
     inset: 0;
-    background: url('https://grainy-gradients.vercel.app/noise.svg');
-    opacity: 0.2;
+    background-image: 
+        repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,.03) 2px, rgba(255,255,255,.03) 4px),
+        repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(255,255,255,.03) 2px, rgba(255,255,255,.03) 4px);
+    opacity: 0.3;
     pointer-events: none;
     z-index: 9999;
 }
